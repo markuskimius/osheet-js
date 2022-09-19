@@ -7,6 +7,8 @@
                 --osheet-border-weight: 5px;
                 --osheet-border-color: gray;
                 --osheet-border-style: solid;
+                --osheet-cell-height: 50px;
+                --osheet-cell-width: 200px;
             }
 
             html, body {
@@ -15,8 +17,8 @@
             }
 
             table.osheet {
-                border-spacing: 3px;
-                border-collapse: collapse;
+                border-spacing: 0px;
+                border-collapse: separate;
 
                 border-top: var(--osheet-border-weight) var(--osheet-border-color) var(--osheet-border-style);
                 border-left: var(--osheet-border-weight) var(--osheet-border-color) var(--osheet-border-style);
@@ -25,8 +27,8 @@
             }
 
             table.osheet > * > tr > * {
-                width: 200px;
-                height: 50px;
+                height: var(--osheet-cell-height);
+                width: var(--osheet-cell-width);
 
                 color: white;
                 margin: 13px;
@@ -39,11 +41,36 @@
                 border-right: var(--osheet-border-weight) var(--osheet-border-color) var(--osheet-border-style);
                 border-top: 0;
             }
+
+            table#plain {
+                border-collapse: collapse;
+                --osheet-border-weight: 1px;
+                --osheet-cell-height: auto;
+                --osheet-cell-width: auto;
+            }
         </style>
     </head>
     <body>
+        <h1>plain table</h1>
+        <table id="plain" class="osheet">
+            <thead>
+                <tr><th>Head</th><th>Head</th><th>Head</th><th>Head</th><th>Head</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Cell</td><td>Cell</td><td>Cell</td><td>Cell</td><td>Cell</td></tr>
+                <tr><td>Cell</td><td>Cell</td><td>Cell</td><td>Cell</td><td>Cell</td></tr>
+                <tr><td>Cell</td><td>Cell</td><td>Cell</td><td>Cell</td><td>Cell</td></tr>
+            </tbody>
+            <tfoot>
+                <tr><th>Foot</th><th>Foot</th><th>Foot</th><th>Foot</th><th>Foot</th></tr>
+            </tfoot>
+        </table>
+
         <h1>rowspan / colspan test</h1>
         <table id="span" class="osheet">
+            <thead>
+                <tr><th>Head</th><th>Head</th><th>Head</th><th>Head</th><th>Head</th></tr>
+            </thead>
             <tbody>
                 <tr><td rowspan=1 colspan=1>Cell</td><td rowspan=1 colspan=1>Cell</td><td rowspan=1 colspan=1>Cell</td><td rowspan=1 colspan=1>Cell</td><td rowspan=1 colspan=1>Cell</td></tr>
                 <tr><td rowspan=2 colspan=1>Cell</td><td rowspan=1 colspan=2>Cell</td>                                 <td rowspan=1 colspan=1>Cell</td><td rowspan=1 colspan=1>Cell</td></tr>
@@ -51,6 +78,9 @@
                 <tr><td rowspan=1 colspan=1>Cell</td>                                 <td rowspan=2 colspan=2>Cell</td>                                 <td rowspan=1 colspan=1>Cell</td></tr>
                 <tr><td rowspan=1 colspan=1>Cell</td>                                                                                                   <td rowspan=1 colspan=1>Cell</td></tr>
             </tbody>
+            <tfoot>
+                <tr><th>Foot</th><th>Foot</th><th>Foot</th><th>Foot</th><th>Foot</th></tr>
+            </tfoot>
         </table>
 
         <h1>large table test</h1>
