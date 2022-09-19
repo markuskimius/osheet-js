@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+    <head>
+        <title>osheet test</title>
+        <style>
+            :root {
+                --osheet-border-weight: 5px;
+                --osheet-border-color: gray;
+                --osheet-border-style: solid;
+            }
+
+            html, body {
+                color: white;
+                background-color: black;
+            }
+
+            table.osheet {
+                border-spacing: 3px;
+                border-collapse: collapse;
+
+                border-top: var(--osheet-border-weight) var(--osheet-border-color) var(--osheet-border-style);
+                border-left: var(--osheet-border-weight) var(--osheet-border-color) var(--osheet-border-style);
+                border-right: 0;
+                border-bottom: 0;
+            }
+
+            table.osheet > * > tr > * {
+                width: 200px;
+                height: 50px;
+
+                color: white;
+                margin: 13px;
+                padding: 7px;
+                overflow: hidden;
+                white-space: nowrap;
+
+                border-bottom: var(--osheet-border-weight) var(--osheet-border-color) var(--osheet-border-style);
+                border-left: 0;
+                border-right: var(--osheet-border-weight) var(--osheet-border-color) var(--osheet-border-style);
+                border-top: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>rowspan / colspan test</h1>
+        <table id="span" class="osheet">
+            <tbody>
+                <tr><td rowspan=1 colspan=1>Cell</td><td rowspan=1 colspan=1>Cell</td><td rowspan=1 colspan=1>Cell</td><td rowspan=1 colspan=1>Cell</td><td rowspan=1 colspan=1>Cell</td></tr>
+                <tr><td rowspan=2 colspan=1>Cell</td><td rowspan=1 colspan=2>Cell</td>                                 <td rowspan=1 colspan=1>Cell</td><td rowspan=1 colspan=1>Cell</td></tr>
+                <tr>                                 <td rowspan=3 colspan=1>Cell</td><td rowspan=1 colspan=3>Cell</td>                                                                  </tr>
+                <tr><td rowspan=1 colspan=1>Cell</td>                                 <td rowspan=2 colspan=2>Cell</td>                                 <td rowspan=1 colspan=1>Cell</td></tr>
+                <tr><td rowspan=1 colspan=1>Cell</td>                                                                                                   <td rowspan=1 colspan=1>Cell</td></tr>
+            </tbody>
+        </table>
+
+        <h1>large table test</h1>
+        <table id="large" class="osheet"></table>
+
+        <script type="module">
+            import OSheet from "../lib/osheet.js";
+
+            function main() {
+                document.querySelectorAll("#large").forEach((table) => {
+                    for(let i=0; i<100; i++) {
+                        const row = table.insertRow(table.length);
+
+                        for(let j=0; j<100; j++) {
+                            const cell = row.insertCell(j);
+
+                            cell.innerText = `${colname(j)}${i+1}`;
+                        }
+                    }
+                });
+
+                document.querySelectorAll(".osheet").forEach((table) => {
+                    const osheet = new OSheet(table, { allowOverflow: true });
+                });
+            }
+
+            function colname(i) {
+                let digits = [ "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z" ]
+                let name = "";
+
+                do {
+                    name = digits[i % digits.length] + name;
+                    i = Math.floor(i / digits.length);
+                    digits = [ "" ].concat(digits);
+                } while(i);
+
+                return name;
+            }
+
+            main();
+        </script>
+    </body>
+</html>
