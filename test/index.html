@@ -103,7 +103,12 @@
                 });
 
                 document.querySelectorAll(".osheet").forEach((table) => {
-                    const osheet = new OSheet(table, { allowOverflow: true });
+                    const osheet = new OSheet(table, {
+                        allowOverflow : true,
+                        celltype      : "*",
+                        dcursor       : "auto",
+                        direction     : OSheet.HORIZONTAL | OSheet.VERTICAL,
+                    });
                 });
             }
 
