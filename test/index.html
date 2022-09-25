@@ -105,7 +105,8 @@
                 document.querySelectorAll(".osheet").forEach((table) => {
                     const osheet = new OSheet(table, {
                         allowOverflow : true,
-                        celltype      : "*",
+                        rcelltype     : "*",
+                        ecelltype     : "*",
                         dcursor       : "auto",
                         direction     : OSheet.HORIZONTAL | OSheet.VERTICAL,
                     });
