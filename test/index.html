@@ -138,11 +138,13 @@
 
                 document.querySelectorAll(".osheet").forEach((table) => {
                     const osheet = new OSheet(table, {
+                        editable      : true,
+                        editableTag   : "*",
+                        resizable     : true,
+                        resizableTag  : "*",
+                        resizableSide : OSheet.RIGHT | OSheet.BOTTOM,
                         allowOverflow : true,
                         defaultCursor : "auto",
-                        editableTag   : "*",
-                        resizableSide : OSheet.RIGHT | OSheet.BOTTOM,
-                        resizableTag  : "*",
                     });
                 });
             }
