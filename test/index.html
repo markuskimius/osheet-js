@@ -139,10 +139,10 @@
                 document.querySelectorAll(".osheet").forEach((table) => {
                     const osheet = new OSheet(table, {
                         allowOverflow : true,
-                        rcelltype     : "*",
-                        ecelltype     : "*",
-                        dcursor       : "auto",
-                        direction     : OSheet.HORIZONTAL | OSheet.VERTICAL,
+                        defaultCursor : "auto",
+                        editableTag   : "*",
+                        resizableSide : OSheet.RIGHT | OSheet.BOTTOM,
+                        resizableTag  : "*",
                     });
                 });
             }
