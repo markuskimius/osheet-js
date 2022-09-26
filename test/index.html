@@ -52,6 +52,8 @@
     </head>
     <body>
         <h1>plain table</h1>
+        <button onclick="addRow(`#plain`)">Add Row</button>
+        <button onclick="addColumn(`#plain`)">Add Column</button>
         <table id="plain" class="osheet">
             <thead>
                 <tr><th>Head</th><th>Head</th><th>Head</th><th>Head</th><th>Head</th></tr>
@@ -67,6 +69,8 @@
         </table>
 
         <h1>rowspan / colspan test</h1>
+        <button onclick="addRow(`#span`)">Add Row</button>
+        <button onclick="addColumn(`#span`)">Add Column</button>
         <table id="span" class="osheet">
             <thead>
                 <tr><th>Head</th><th>Head</th><th>Head</th><th>Head</th><th>Head</th></tr>
@@ -84,8 +88,38 @@
         </table>
 
         <h1>large table test</h1>
+        <button onclick="addRow(`#large`)">Add Row</button>
+        <button onclick="addColumn(`#large`)">Add Column</button>
         <table id="large" class="osheet"></table>
 
+        <script>
+            function addRow(selector) {
+                document.querySelectorAll(selector).forEach((table) => {
+                    const ncol = table.querySelectorAll(":scope > *:nth-child(1) > tr:nth-child(1) > *").length;
+                    const nrow = table.querySelectorAll(":scope > * > tr").length;
+                    const row = table.insertRow(nrow);
+
+                    for(let i=0; i<ncol; i++) {
+                        const cell = row.insertCell(i);
+
+                        cell.innerText = `(${nrow+1}, ${i+1})`;
+                    }
+                });
+            }
+
+            function addColumn(selector) {
+                document.querySelectorAll(selector).forEach((table) => {
+                    const ncol = table.querySelectorAll(":scope > *:nth-child(1) > tr:nth-child(1) > *").length;
+                    const nrow = table.querySelectorAll(":scope > * > tr").length;
+
+                    table.querySelectorAll(":scope > * > tr").forEach((row, i) => {
+                        const cell = row.insertCell(row.children.length);
+
+                        cell.innerText = `(${i+1}, ${ncol+1})`;
+                    });
+                });
+            }
+        </script>
         <script type="module">
             import OSheet from "../lib/osheet.js";
 
