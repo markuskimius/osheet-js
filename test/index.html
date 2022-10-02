@@ -3,50 +3,35 @@
     <head>
         <title>osheet test</title>
         <style>
-            :root {
-                --osheet-border-weight: 5px;
-                --osheet-border-color: gray;
-                --osheet-border-style: solid;
-                --osheet-cell-height: 50px;
-                --osheet-cell-width: 200px;
-            }
-
             html, body {
                 color: white;
                 background-color: black;
             }
 
             table.osheet {
-                border-spacing: 0px;
-                border-collapse: separate;
-
-                border-top: var(--osheet-border-weight) var(--osheet-border-color) var(--osheet-border-style);
-                border-left: var(--osheet-border-weight) var(--osheet-border-color) var(--osheet-border-style);
-                border-right: 0;
-                border-bottom: 0;
+                border-spacing: 1px;
+                border-collapse: collapse;
             }
 
             table.osheet > * > tr > * {
-                height: var(--osheet-cell-height);
-                width: var(--osheet-cell-width);
-
                 color: white;
                 margin: 13px;
                 padding: 7px;
                 overflow: hidden;
                 white-space: nowrap;
 
-                border-bottom: var(--osheet-border-weight) var(--osheet-border-color) var(--osheet-border-style);
-                border-left: 0;
-                border-right: var(--osheet-border-weight) var(--osheet-border-color) var(--osheet-border-style);
-                border-top: 0;
+                border: 5px gray solid;
+                height: 50px;
+                width: 200px;
             }
 
             table#plain {
                 border-collapse: collapse;
-                --osheet-border-weight: 1px;
-                --osheet-cell-height: auto;
-                --osheet-cell-width: auto;
+                border: 1px gray solid;
+            }
+
+            td:focus {
+                outline: medium solid #0f0;
             }
         </style>
     </head>
